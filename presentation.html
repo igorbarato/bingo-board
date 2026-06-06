@@ -253,186 +253,21 @@
         </div>
       </div>
 
-      <div id="masterBoardSlide">
+      <div id="presentationBoardSlide" style="display:block;">
         <div id="blocker"></div>
-        <div class="controlsCol">
-          <div style="margin:-6px 0 0 28px;">
-            <span class="smallButton" id="reset" onclick="resetBoard();">Reiniciar</span>
-            <span class="smallButton" id="themes" onclick="hide('masterBoardSlide');show('settingsSlide', 'grid');">Temas</span>
-          </div>
+        <div id="masterBoardSlideControls"  style="width: 500px;">
             <div class="bingo-logo">
-                <img src="assets/img/paroquiaLogo.png" style="width: 100%; height: auto;">
+                <img src="assets/img/paroquiaLogo.png" style="width: 100%; height: auto;max-width: 300px;">
             </div>
-<!--          <div class="winningPatternDiv">-->
-<!--            <div class="bingoCard" onclick="hide('masterBoardSlide');show('winningPatternSlide', 'grid');">-->
-<!--              <div class="bingoCardHeader">B</div>-->
-<!--              <div class="bingoCardHeader">I</div>-->
-<!--              <div class="bingoCardHeader">N</div>-->
-<!--              <div class="bingoCardHeader">G</div>-->
-<!--              <div class="bingoCardHeader">O</div>-->
-<!--              <div class="bingoCardBody" id="1card"></div>-->
-<!--              <div class="bingoCardBody" id="6card"></div>-->
-<!--              <div class="bingoCardBody" id="11card"></div>-->
-<!--              <div class="bingoCardBody" id="16card"></div>-->
-<!--              <div class="bingoCardBody" id="21card"></div>-->
-<!--              <div class="bingoCardBody" id="2card"></div>-->
-<!--              <div class="bingoCardBody" id="7card"></div>-->
-<!--              <div class="bingoCardBody" id="12card"></div>-->
-<!--              <div class="bingoCardBody" id="17card"></div>-->
-<!--              <div class="bingoCardBody" id="22card"></div>-->
-<!--              <div class="bingoCardBody" id="3card"></div>-->
-<!--              <div class="bingoCardBody" id="8card"></div>-->
-<!--              <div class="bingoCardBody" id="13card"></div>-->
-<!--              <div class="bingoCardBody" id="18card"></div>-->
-<!--              <div class="bingoCardBody" id="23card"></div>-->
-<!--              <div class="bingoCardBody" id="4card"></div>-->
-<!--              <div class="bingoCardBody" id="9card"></div>-->
-<!--              <div class="bingoCardBody" id="14card"></div>-->
-<!--              <div class="bingoCardBody" id="19card"></div>-->
-<!--              <div class="bingoCardBody" id="24card"></div>-->
-<!--              <div class="bingoCardBody" id="5card"></div>-->
-<!--              <div class="bingoCardBody" id="10card"></div>-->
-<!--              <div class="bingoCardBody" id="15card"></div>-->
-<!--              <div class="bingoCardBody" id="20card"></div>-->
-<!--              <div class="bingoCardBody" id="25card"></div>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="bigBingoBallClass" id="bigBingoBall" onclick="toggleBallsDrawnRemaining('toggle');">
+          <div class="bigBingoBallClass" id="bigBingoBall" onclick="toggleBallsDrawnRemaining('toggle');" style="background:radial-gradient(circle at 31.5px 12px, rgba(108, 201, 226,0.85), rgba(84, 165, 188,0.85));opacity: 1;">
             <div id="bigBingoLetter">&nbsp;</div>
             <div id="bigBingoNumber">&nbsp;</div>
           </div>
-          <div id="ballsDrawnRemaining">
-            <span id="ballsDrawn">
-              <span id="ballsDrawnNum" style="font-size:38px;font-weight:700;"></span>
-               &nbsp;sorteadas
-            </span>
-            <span id="ballsRemaining">
-              <span id="ballsRemainingNum" style="font-size:38px;font-weight:700;"></span>
-               &nbsp;restantes
-           </span>
-          </div>
-          <div class="boardToggle" id="hideBoard" onclick="toggleBlocker()">Hide Board</div>
-          <div class="boardToggle" id="showBoard" onclick="toggleBlocker()">Show Board</div>
-        </div>
-        <div class="bingoCol bCol">
-          <div class="bingoLetter" onclick="hideBingo('B', 'toggle');">
-            <div id="bingoB">B</div>
-          </div>
-          <div class="bingoBalls" id="bingoBallsB">
-            <div class="bingoBall" id="1bingo">1</div>
-            <div class="bingoBall" id="2bingo">2</div>
-            <div class="bingoBall" id="3bingo">3</div>
-            <div class="bingoBall" id="4bingo">4</div>
-            <div class="bingoBall" id="5bingo">5</div>
-            <div class="bingoBall" id="6bingo">6</div>
-            <div class="bingoBall" id="7bingo">7</div>
-            <div class="bingoBall" id="8bingo">8</div>
-            <div class="bingoBall" id="9bingo">9</div>
-            <div class="bingoBall" id="10bingo">10</div>
-            <div class="bingoBall" id="11bingo">11</div>
-            <div class="bingoBall" id="12bingo">12</div>
-            <div class="bingoBall" id="13bingo">13</div>
-            <div class="bingoBall" id="14bingo">14</div>
-            <div class="bingoBall" id="15bingo">15</div>
+          <div class="lastBingoBalls">
+            <div class="">Últimas bolas cantadas</div>
+            <div id="lastDrawnBingoBalls"></div>
           </div>
         </div>
-        <div class="bingoCol iCol">
-          <div class="bingoLetter" onclick="hideBingo('I', 'toggle');">
-            <div id="bingoI">I</div>
-          </div>
-          <div class="bingoBalls" id="bingoBallsI">
-            <div class="bingoBall" id="16bingo">16</div>
-            <div class="bingoBall" id="17bingo">17</div>
-            <div class="bingoBall" id="18bingo">18</div>
-            <div class="bingoBall" id="19bingo">19</div>
-            <div class="bingoBall" id="20bingo">20</div>
-            <div class="bingoBall" id="21bingo">21</div>
-            <div class="bingoBall" id="22bingo">22</div>
-            <div class="bingoBall" id="23bingo">23</div>
-            <div class="bingoBall" id="24bingo">24</div>
-            <div class="bingoBall" id="25bingo">25</div>
-            <div class="bingoBall" id="26bingo">26</div>
-            <div class="bingoBall" id="27bingo">27</div>
-            <div class="bingoBall" id="28bingo">28</div>
-            <div class="bingoBall" id="29bingo">29</div>
-            <div class="bingoBall" id="30bingo">30</div>
-          </div>
-        </div>
-        <div class="bingoCol nCol">
-          <div class="bingoLetter" onclick="hideBingo('N', 'toggle');">
-            <div id="bingoN">N</div>
-          </div>
-          <div class="bingoBalls" id="bingoBallsN">
-            <div class="bingoBall" id="31bingo">31</div>
-            <div class="bingoBall" id="32bingo">32</div>
-            <div class="bingoBall" id="33bingo">33</div>
-            <div class="bingoBall" id="34bingo">34</div>
-            <div class="bingoBall" id="35bingo">35</div>
-            <div class="bingoBall" id="36bingo">36</div>
-            <div class="bingoBall" id="37bingo">37</div>
-            <div class="bingoBall" id="38bingo">38</div>
-            <div class="bingoBall" id="39bingo">39</div>
-            <div class="bingoBall" id="40bingo">40</div>
-            <div class="bingoBall" id="41bingo">41</div>
-            <div class="bingoBall" id="42bingo">42</div>
-            <div class="bingoBall" id="43bingo">43</div>
-            <div class="bingoBall" id="44bingo">44</div>
-            <div class="bingoBall" id="45bingo">45</div>
-          </div>
-        </div>
-        <div class="bingoCol gCol">
-          <div class="bingoLetter" onclick="hideBingo('G', 'toggle');">
-            <div id="bingoG">G</div>
-          </div>
-          <div class="bingoBalls" id="bingoBallsG">
-            <div class="bingoBall" id="46bingo">46</div>
-            <div class="bingoBall" id="47bingo">47</div>
-            <div class="bingoBall" id="48bingo">48</div>
-            <div class="bingoBall" id="49bingo">49</div>
-            <div class="bingoBall" id="50bingo">50</div>
-            <div class="bingoBall" id="51bingo">51</div>
-            <div class="bingoBall" id="52bingo">52</div>
-            <div class="bingoBall" id="53bingo">53</div>
-            <div class="bingoBall" id="54bingo">54</div>
-            <div class="bingoBall" id="55bingo">55</div>
-            <div class="bingoBall" id="56bingo">56</div>
-            <div class="bingoBall" id="57bingo">57</div>
-            <div class="bingoBall" id="58bingo">58</div>
-            <div class="bingoBall" id="59bingo">59</div>
-            <div class="bingoBall" id="60bingo">60</div>
-          </div>
-        </div>
-        <div class="bingoCol oCol">
-          <div class="bingoLetter" onclick="hideBingo('O', 'toggle');">
-            <div id="bingoO">O</div>
-          </div>
-          <div class="bingoBalls" id="bingoBallsO">
-            <div class="bingoBall" id="61bingo">61</div>
-            <div class="bingoBall" id="62bingo">62</div>
-            <div class="bingoBall" id="63bingo">63</div>
-            <div class="bingoBall" id="64bingo">64</div>
-            <div class="bingoBall" id="65bingo">65</div>
-            <div class="bingoBall" id="66bingo">66</div>
-            <div class="bingoBall" id="67bingo">67</div>
-            <div class="bingoBall" id="68bingo">68</div>
-            <div class="bingoBall" id="69bingo">69</div>
-            <div class="bingoBall" id="70bingo">70</div>
-            <div class="bingoBall" id="71bingo">71</div>
-            <div class="bingoBall" id="72bingo">72</div>
-            <div class="bingoBall" id="73bingo">73</div>
-            <div class="bingoBall" id="74bingo">74</div>
-            <div class="bingoBall" id="75bingo">75</div>
-          </div>
-        </div>
-        <!--Workaround to fix Bingo ball jumping bug in Chrome-->
-        <div style="visibility:hidden;">
-          <div class="bingoBallActiveB">a</div>
-          <div class="bingoBallActiveI">a</div>
-          <div class="bingoBallActiveN">a</div>
-          <div class="bingoBallActiveG">a</div>
-          <div class="bingoBallActiveO">a</div>
-        </div>
-        <!--End-->
       </div>
 
       <div id="settingsSlide">
@@ -470,6 +305,53 @@
       </div>
 
     </div>
+
+    <script>
+      // Listen for changes originating from other tabs
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'bingoMasterBoardSaveData') {
+          // Parse the old and new JSON string values into JS objects
+          const oldParsedJson = event.oldValue ? JSON.parse(event.oldValue) : null;
+          const newParsedJson = event.newValue ? JSON.parse(event.newValue) : null;
+
+          let bingoIDNum = newParsedJson.lastBingoBall;
+          let typeOfBingoBallLetter = newParsedJson.lastBingoBallLetter;
+
+          if (bingoIDNum !== 0) {
+            document.getElementById("bigBingoLetter").innerHTML=typeOfBingoBallLetter;
+            document.getElementById("bigBingoNumber").innerHTML=bingoIDNum;
+            document.getElementById("bigBingoNumber").style.fontSize=104+"px";
+            setTimeout(() => {
+              document.getElementById("bigBingoNumber").style.fontSize=95+"px";
+            },100);
+          }
+          else {
+            document.getElementById("bigBingoLetter").innerHTML="&nbsp;";
+            document.getElementById("bigBingoNumber").innerHTML="";
+          }
+          document.getElementById("lastDrawnBingoBalls").innerHTML=newParsedJson.drawnBingoBalls.slice(-6, -1);
+        }
+      });
+    </script>
+
+    <style>
+      #area {
+        background: rgb(255, 255, 255) !important;
+      }
+
+      #presentationBoardSlide {
+        text-align: center;
+        max-width: 500px;
+        margin: auto;
+        padding: 2rem;
+      }
+
+      #masterBoardSlideControls {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+    </style>
 
     <script src="./assets/js/featureChecker.js"></script>
     <script src="./assets/js/main.js"></script>

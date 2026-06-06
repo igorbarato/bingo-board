@@ -176,16 +176,6 @@ body {
                       "helpFooter";
 }
 
-#winningPatternSlide {
-  display:none;
-  height:100%;
-  grid-template-columns:100%;
-  grid-template-rows: 96px 1fr 77px;
-  grid-template-areas: "helpHeader"
-                      "helpContent"
-                      "helpFooter";
-}
-
 h2 {
   font-size:36px;
   font-weight:300;
@@ -196,6 +186,11 @@ h2 {
 
 .controlsCol {
   grid-area: controlsCol;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 .bCol {
@@ -557,7 +552,7 @@ margin:0.5em 0;
   width:186px;
   height:186px;
   margin:0 auto;
-  margin-top:135px;
+  /*margin-top:135px;*/
   cursor:pointer;
 }
 
@@ -784,7 +779,7 @@ color:gray;
 }
 
 #classic {
-  color:rgb(148,138,84);
+  color:rgb(256,256,256);
 }
 
 #red {
@@ -796,7 +791,7 @@ color:gray;
 }
 
 #blue {
-  color:rgb(51,102,255);
+  color:rgb(17,88,184);
 }
 
 #purple {
@@ -805,32 +800,6 @@ color:gray;
 
 .chromeBingoLetterFix {
   transform:translateX(-50%) translateZ(0);
-}
-
-.winningPatternDiv {
-  width:90%;
-  height:201px;
-  background:rgba(0,0,0,0);
-  margin:0 auto;
-  margin-top:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
-
-.bingoCard {
-  display:grid;
-  height:180px;
-  width:150px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  border:1px solid #7f7f7f;
-}
-
-.bingoCard:hover {
-  cursor:pointer;
-  opacity:0.75;
 }
 
 .bigBingoCard {
@@ -843,40 +812,6 @@ color:gray;
   font-size:70px;
   box-shadow:4px 4px 12px #777;
   margin-right:40px;
-}
-
-.bingoCardBody {
-  background-color:#f2f2f2;
-  border:1px solid #7f7f7f;
-}
-
-.bingoCardHeader {
-  background:#e1cdac;
-  border:1px solid #7f7f7f;
-  text-align:center;
-  font-size:80%;
-  line-height:0.6;
-  font-family:arya;
-  color:#ce181e;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.winningPatternNames {
-  width:600px;
-  height:380px;
-  font-size:27px;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-}
-
-.winningPatternNames div {
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
 .cardExplanation {

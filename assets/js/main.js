@@ -12,8 +12,9 @@ let saveData = {
   lastActionWasRemove: false,
   ballsDrawnRemaining: "drawn",
   hiddenBingoLetters: [],
-  winningPattern: [],
-  firstRun: 0
+  firstRun: 0,
+  lastBingoBall: 0,
+  lastBingoBallLetter: ""
 }
 
 if(supportsLocalStorage) {
@@ -132,7 +133,7 @@ function show(elementName, display) {
         e.preventDefault();
         keyPressed = true;
         if (e.keyCode === 32) {randomDraw();}
-        else if (e.keyCode === 82) {resetBoard();}
+        // else if (e.keyCode === 82) {resetBoard();}
         else if (e.keyCode === 88) {toggleBlocker();}
         else if (e.keyCode === 66) {hideBingo('B', 'toggle');}
         else if (e.keyCode === 73) {hideBingo('I', 'toggle');}
@@ -140,7 +141,6 @@ function show(elementName, display) {
         else if (e.keyCode === 71) {hideBingo('G', 'toggle');}
         else if (e.keyCode === 79) {hideBingo('O', 'toggle');}
         else if (e.keyCode === 84) {hide('masterBoardSlide');show('settingsSlide', 'grid');}
-        else if (e.keyCode === 87) {hide('masterBoardSlide');show('winningPatternSlide', 'grid');}
         else if (e.keyCode === 86) {toggleBallsDrawnRemaining('toggle');}
         else if (e.keyCode === 72) {hide('masterBoardSlide');show('titleSlide');}
         else if (e.keyCode === 70) {toggleFullScreen();}
@@ -154,16 +154,6 @@ function show(elementName, display) {
         e.preventDefault();
         keyPressed = true;
         if (e.keyCode === 84 || e.keyCode === 13) {hide('settingsSlide');show('masterBoardSlide', 'grid');}
-        else if (e.keyCode === 70) {toggleFullScreen();}
-      }
-    }
-  }
-  else if (elementName === "winningPatternSlide") {
-    document.onkeydown = function(e) {
-      if(!keyPressed) {
-        e.preventDefault();
-        keyPressed = true;
-        if (e.keyCode === 87 || e.keyCode === 13) {hideBingoLettersBasedOnWinningPattern();hide('winningPatternSlide');show('masterBoardSlide', 'grid');}
         else if (e.keyCode === 70) {toggleFullScreen();}
       }
     }
@@ -261,7 +251,7 @@ function changeFullScreenImg() {
 function changeBG(color) {
   let newColor;
   if (color === "classic") {
-    newColor = "#d1cc85";
+    newColor = "rgb(256,256,256)";
     document.getElementById("blocker").style.backgroundImage = "linear-gradient(#c4bd97, #948A54)";
   } else if (color === "red") {
     newColor = "rgb(253, 166, 166)";
@@ -270,7 +260,7 @@ function changeBG(color) {
     newColor = "rgb(150, 206, 129)";
     document.getElementById("blocker").style.backgroundImage = "linear-gradient(#a9c571, #77933c)";
   } else if (color === "blue") {
-    newColor = "rgb(139, 199, 226)";
+    newColor = "rgb(17,88,184)";
     document.getElementById("blocker").style.backgroundImage = "linear-gradient(#9abce6, #558ed5)";
   } else if (color === "purple") {
     newColor = "rgb(189, 176, 216)";
@@ -301,6 +291,8 @@ function activateBingoBall(bingoIDNum) {
       document.getElementById("bigBingoNumber").style.fontSize=95+"px";
     },100);
     saveData.drawnBingoBalls.push(bingoIDNum);
+    saveData.lastBingoBall = bingoIDNum;
+    saveData.lastBingoBallLetter = typeOfBingoBallLetter;
     saveData.lastActionWasRemove = false;
     save();
 	} else {
@@ -309,6 +301,8 @@ function activateBingoBall(bingoIDNum) {
     document.getElementById("bigBingoLetter").innerHTML="&nbsp;";
     document.getElementById("bigBingoNumber").innerHTML="&nbsp;";
     saveData.drawnBingoBalls.splice(saveData.drawnBingoBalls.indexOf(bingoIDNum), 1);
+    saveData.lastBingoBall = 0;
+    saveData.lastBingoBallLetter = '';
     saveData.lastActionWasRemove = true;
     save();
 	}
@@ -589,10 +583,11 @@ function resetBoard() {
     document.getElementById("blocker").style.opacity = 1;
   },100)
   saveData.drawnBingoBalls = [];
+  saveData.lastBingoBall = 0;
+  saveData.lastBingoBallLetter = '';
   saveData.lastActionWasRemove = false;
   save();
   hideBingo("", "reset");
-  clearWinningPattern();
   updateBallStats();
 }
 
@@ -628,10 +623,6 @@ function setUpMasterBoard() {
   for (let i=0;i<saveData.hiddenBingoLetters.length;i+=1) {
     hideBingo(saveData.hiddenBingoLetters[i], "render");
   }
-  for (let i=0;i<saveData.winningPattern.length;i+=1) {
-    document.getElementById(saveData.winningPattern[i] + "card").classList.add("bingoCardActive2");
-    document.getElementById(saveData.winningPattern[i] + "bigcard").classList.add("bingoCardActive");
-  }
   toggleBallsDrawnRemaining("render");
   updateBallStats();
 }
@@ -645,13 +636,13 @@ function setUpSettings() {
   document.getElementById("bingoStyleBall").style.backgroundColor = "";
   document.getElementById("bingoStyleVintage").style.backgroundColor = "";
   if (saveData.themeColor === "classic") {
-    document.getElementById("classic").style.backgroundColor = "rgba(148,138,84,0.28)";
+    document.getElementById("classic").style.backgroundColor = "rgba(256,256,256,0.28)";
   } else if (saveData.themeColor === "red") {
     document.getElementById("red").style.backgroundColor = "rgba(255,0,0,0.2)";
   } else if (saveData.themeColor === "green") {
     document.getElementById("green").style.backgroundColor = "rgba(0,128,0,0.2)";
   } else if (saveData.themeColor === "blue") {
-    document.getElementById("blue").style.backgroundColor = "rgba(51,102,255,0.2)";
+    document.getElementById("blue").style.backgroundColor = "rgba(17,88,184,0.2)";
   } else if (saveData.themeColor === "purple") {
     document.getElementById("purple").style.backgroundColor = "rgba(164,70,153,0.2)";
   }
@@ -666,76 +657,6 @@ function changeBackgroundColor(theColor) {
   saveData.themeColor = theColor;
   save();
   setUpSettings();
-}
-
-function toggleWinningPattern(theNumber) {
-  let bingoID = theNumber + "bigcard";
-  let bingoID2 = theNumber + "card";
-  if (saveData.winningPattern.indexOf(theNumber) === -1) {
-    document.getElementById(bingoID).classList.add("bingoCardActive");
-    document.getElementById(bingoID2).classList.add("bingoCardActive2");
-    saveData.winningPattern.push(theNumber);
-  } else {
-    saveData.winningPattern.splice(saveData.winningPattern.indexOf(theNumber), 1);
-    document.getElementById(bingoID).classList.remove("bingoCardActive");
-    document.getElementById(bingoID2).classList.remove("bingoCardActive2");
-  }
-  save();
-}
-
-function winningPatternFromName() {
-  clearWinningPattern();
-  for (let i = 0; i < arguments.length; i+=1) {
-    toggleWinningPattern(arguments[i]);
-  }
-}
-
-function clearWinningPattern() {
-  for (let i=0;i<saveData.winningPattern.length;i+=1) {
-    document.getElementById(saveData.winningPattern[i] + "card").classList.remove("bingoCardActive2");
-    document.getElementById(saveData.winningPattern[i] + "bigcard").classList.remove("bingoCardActive");
-  }
-  saveData.winningPattern = [];
-  save();
-}
-
-function hideBingoLettersBasedOnWinningPattern() {
-  let bExists = false;
-  let iExists = false;
-  let nExists = false;
-  let gExists = false;
-  let oExists = false;
-  if (saveData.winningPattern.length > 0) {
-    for (let i=0;i<saveData.winningPattern.length;i+=1) {
-      if (saveData.winningPattern[i] <=5) {
-        bExists = true;
-      } else if (saveData.winningPattern[i] <=10) {
-        iExists = true;
-      } else if (saveData.winningPattern[i] <=15) {
-        nExists = true;
-      } else if (saveData.winningPattern[i] <=20) {
-        gExists = true;
-      } else if (saveData.winningPattern[i] <=25) {
-        oExists = true;
-      }
-    }
-    hideBingo("", "reset");
-    if (bExists === false) {
-      hideBingo('B', 'toggle');
-    }
-    if (iExists === false) {
-      hideBingo('I', 'toggle');
-    }
-    if (nExists === false) {
-      hideBingo('N', 'toggle');
-    }
-    if (gExists === false) {
-      hideBingo('G', 'toggle');
-    }
-    if (oExists === false) {
-      hideBingo('O', 'toggle');
-    }
-  }
 }
 
 function navHelp(sectionName) {
